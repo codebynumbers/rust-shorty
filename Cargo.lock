@@ -124,14 +124,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "hello-rocket"
-version = "0.1.0"
-dependencies = [
- "pruefung",
- "rocket",
-]
-
-[[package]]
 name = "hermit-abi"
 version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -388,6 +380,14 @@ dependencies = [
  "state",
  "time",
  "unicode-xid",
+]
+
+[[package]]
+name = "rust-shorty"
+version = "0.1.0"
+dependencies = [
+ "pruefung",
+ "rocket",
 ]
 
 [[package]]

@@ -10,7 +10,6 @@ struct Site {
     url: String
 }
 
-
 #[get("/")]
 fn index() -> &'static str {
     "Hello, world!"
@@ -24,16 +23,19 @@ fn expand(tag: String) -> String {
 #[get("/data/shorten?<site..>")]
 fn shorten(site: Option<Form<Site>>) -> String {
     if let Some(site) = site {
-        let mut hasher = Fnv32a::default();
-        hasher.write(site.url.as_bytes());
-        let hash = hasher.finish();
-        format!("{:x}", hash)
+        fnv_hash(&site.url)
     } else {
         String::from("error")
     }
 }
 
-
 fn main() {
     rocket::ignite().mount("/", routes![index, expand, shorten]).launch();
+}
+
+fn fnv_hash(value: &String) -> String {
+    let mut hasher = Fnv32a::default();
+    hasher.write(value.as_bytes());
+    let hash = hasher.finish();
+    format!("{:x}", hash)
 }
